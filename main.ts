@@ -220,19 +220,19 @@ function spawnObstacle () {
     goose = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        . . . . . . . . . b 5 5 b . . . 
+        . . . . . . . . . b e e b . . . 
         . . . . . . b b b b b b . . . . 
-        . . . . . b b 5 5 5 5 5 b . . . 
-        . b b b b b 5 5 5 5 5 5 5 b . . 
-        . b d 5 b 5 5 5 5 5 5 5 5 b . . 
-        . . b 5 5 b 5 d 1 f 5 d 4 f . . 
-        . . b d 5 5 b 1 f f 5 4 4 c . . 
-        b b d b 5 5 5 d f b 4 4 4 4 b . 
-        b d d c d 5 5 b 5 4 4 4 4 4 4 b 
-        c d d d c c b 5 5 5 5 5 5 5 b . 
-        c b d d d d d 5 5 5 5 5 5 5 b . 
-        . c d d d d d d 5 5 5 5 5 d b . 
-        . . c b d d d d d 5 5 5 b b . . 
+        . . . . . b b e e e e e b . . . 
+        . b b b b b e e e e e e e b . . 
+        . b d e b e e e e e e e e b . . 
+        . . b e e b e d 1 f e d f f . . 
+        . . b d e e b 1 f f e f f c . . 
+        b b d b e e e d f b f f f f b . 
+        b d d c d e e b 1 f f f f f f b 
+        c d d d c c b 1 1 1 1 1 1 1 b . 
+        c b d d d d d 1 1 1 1 1 1 1 b . 
+        . c d d d d d d 1 1 1 1 1 d b . 
+        . . c b d d d d d 1 1 1 b b . . 
         . . . c c c c c c c c b b . . . 
         `, SpriteKind.Enemy)
     goose.setPosition(character.x + randint(-15, 15), -10)
@@ -456,19 +456,19 @@ function titleFrame () {
     goose = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        . . . . . . . . . b 5 5 b . . . 
+        . . . . . . . . . b e e b . . . 
         . . . . . . b b b b b b . . . . 
-        . . . . . b b 5 5 5 5 5 b . . . 
-        . b b b b b 5 5 5 5 5 5 5 b . . 
-        . b d 5 b 5 5 5 5 5 5 5 5 b . . 
-        . . b 5 5 b 5 d 1 f 5 d 4 f . . 
-        . . b d 5 5 b 1 f f 5 4 4 c . . 
-        b b d b 5 5 5 d f b 4 4 4 4 b . 
-        b d d c d 5 5 b 5 4 4 4 4 4 4 b 
-        c d d d c c b 5 5 5 5 5 5 5 b . 
-        c b d d d d d 5 5 5 5 5 5 5 b . 
-        . c d d d d d d 5 5 5 5 5 d b . 
-        . . c b d d d d d 5 5 5 b b . . 
+        . . . . . b b e e e e e b . . . 
+        . b b b b b e e e e e e e b . . 
+        . b d e b e e e e e e e e b . . 
+        . . b e e b e d 1 f e d f f . . 
+        . . b d e e b 1 f f e f f c . . 
+        b b d b e e e d f b f f f f b . 
+        b d d c d e e b 1 f f f f f f b 
+        c d d d c c b 1 1 1 1 1 1 1 b . 
+        c b d d d d d 1 1 1 1 1 1 1 b . 
+        . c d d d d d d 1 1 1 1 1 d b . 
+        . . c b d d d d d 1 1 1 b b . . 
         . . . c c c c c c c c b b . . . 
         `, SpriteKind.Enemy)
     animation.setAction(goose, ActionKind.Walking)
