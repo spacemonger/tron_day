@@ -550,11 +550,19 @@ function titleFrame () {
 let title: Sprite = null
 let goose: Sprite = null
 let character: Sprite = null
+let isStarted = false
 titleFrame()
 pause(2000)
 while (!(controller.A.isPressed() || controller.B.isPressed())) {
     pause(100)
 }
+isStarted = true
 selectCharacter()
 character.setPosition(75, 105)
-controller.moveSprite(character)
+controller.moveSprite(character, 100, 0)
+character.setFlag(SpriteFlag.StayInScreen, true)
+forever(function () {
+    while (!(isStarted)) {
+    	
+    }
+})
