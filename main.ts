@@ -132,6 +132,7 @@ function selectCharacter () {
     goose.destroy()
     title.destroy()
     if (controller.A.isPressed()) {
+        characterChoice = 0
         character = sprites.create(img`
             . . . . f f f f . . . . . 
             . . f f f f f f f f . . . 
@@ -152,6 +153,7 @@ function selectCharacter () {
             `, SpriteKind.Player)
     }
     if (controller.B.isPressed()) {
+        characterChoice = 1
         character = sprites.create(img`
             . f f f . f f f f . f f f . 
             f f f f f c c c c f f f f f 
@@ -237,70 +239,90 @@ function spawnObstacle () {
     goose.setVelocity(0, 100)
 }
 function walking (mySprite: Sprite) {
-    character = sprites.create(img`
-        . . . . f f f f . . . . . 
-        . . f f c c c c f f . . . 
-        . f f c c c c c c f f . . 
-        f f c c c c c c c c f f . 
-        f f c c f c c c c c c f . 
-        f f f f f c c c f c c f . 
-        f f f f c c c f c c f f . 
-        f f f f f f f f f f f f . 
-        f f f f f f f f f f f f . 
-        . f f f f f f f f f f . . 
-        . f f f f f f f f f f . . 
-        f e f f f f f f f f e f . 
-        e 4 f 7 7 7 7 7 7 c 4 e . 
-        e e f 6 6 6 6 6 6 f e e . 
-        . . . f f f f f f . . . . 
-        . . . f f . . f f . . . . 
-        `, SpriteKind.Player)
-    animation.runImageAnimation(
-    character,
-    [img`
-        . . . . . . . . . . . . . 
-        . . . . . f f f f . . . . 
-        . . . f f c c c c f f . . 
-        . f f f c c c c c c f f . 
-        f f c c c c c c c c c f f 
-        f c c c c f c c c c c c f 
-        . f f f f c c c c f c c f 
-        . f f f f c c f c c c f f 
-        . f f f f f f f f f f f f 
-        . f f f f f f f f f f f f 
-        . . f f f f f f f f f f . 
-        . . e f f f f f f f f f . 
-        . . e f f f f f f f f e f 
-        . . 4 c 7 7 7 7 7 e 4 4 e 
-        . . e f f f f f f f e e . 
-        . . . f f f . . . . . . . 
-        `],
-    200,
-    false
-    )
-    animation.runImageAnimation(
-    character,
-    [img`
-        . . . . . . . . . . . . . 
-        . . . . . f f f f . . . . 
-        . . . f f c c c c f f . . 
-        . . f f c c c c c c f f . 
-        . f f f c c c c c c c f f 
-        f f f c c c c c c c c c f 
-        f f c c c f c c c c c c f 
-        . f f f f f c c c f c f f 
-        . f f f f c c f f c f f f 
-        . . f f f f f f f f f f f 
-        . . f f f f f f f f f f . 
-        . . f f f f f f f f f e . 
-        . f e f f f f f f f f e . 
-        . e 4 4 e 7 7 7 7 7 c 4 . 
-        . . e e f f f f f f f e . 
-        . . . . . . . . f f f . . 
-        `],
-    200,
-    false
-    )
+    if (characterChoice == 0) {
+        animation.runImageAnimation(
+        character,
+        [img`
+            . . . . . . . . . . . . . 
+            . . . . . f f f f . . . . 
+            . . . f f c c c c f f . . 
+            . f f f c c c c c c f f . 
+            f f c c c c c c c c c f f 
+            f c c c c f c c c c c c f 
+            . f f f f c c c c f c c f 
+            . f f f f c c f c c c f f 
+            . f f f f f f f f f f f f 
+            . f f f f f f f f f f f f 
+            . . f f f f f f f f f f . 
+            . . e f f f f f f f f f . 
+            . . e f f f f f f f f e f 
+            . . 4 c 7 7 7 7 7 e 4 4 e 
+            . . e f f f f f f f e e . 
+            . . . f f f . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . 
+            . . . . . f f f f . . . . 
+            . . . f f c c c c f f . . 
+            . . f f c c c c c c f f . 
+            . f f f c c c c c c c f f 
+            f f f c c c c c c c c c f 
+            f f c c c f c c c c c c f 
+            . f f f f f c c c f c f f 
+            . f f f f c c f f c f f f 
+            . . f f f f f f f f f f f 
+            . . f f f f f f f f f f . 
+            . . f f f f f f f f f e . 
+            . f e f f f f f f f f e . 
+            . e 4 4 e 7 7 7 7 7 c 4 . 
+            . . e e f f f f f f f e . 
+            . . . . . . . . f f f . . 
+            `],
+        200,
+        true
+        )
+    }
+    if (characterChoice == 1) {
+        animation.runImageAnimation(
+        character,
+        [img`
+            . . . . . . . . . . . . . . 
+            . f f f . f f f f . f f f . 
+            f f f f f c c c c f f f f f 
+            f f f f b c c c c b f f f f 
+            f f f c 3 c c c c 3 c f f f 
+            . f 3 3 c c c c c c 3 3 f . 
+            . f c c c c c c c c c f f . 
+            . f f c c c c c c c c f f . 
+            . f f c c c c c c f f f f . 
+            . f f f f f f f f f f f f . 
+            . . f f f f f f f f f f . . 
+            . . e f f f f f f f f e . . 
+            . . e f f f f f f f f 4 e . 
+            . . 4 f 3 3 3 3 3 e d d 4 . 
+            . . e f f f f f f e e 4 . . 
+            . . . f f f . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . 
+            . f f f . f f f f . f f f . 
+            f f f f f c c c c f f f f f 
+            f f f f b c c c c b f f f f 
+            f f f c 3 c c c c 3 c f f f 
+            . f 3 3 c c c c c c 3 3 f . 
+            . f f c c c c c c c c c f . 
+            . f f c c c c c c c c f f . 
+            . f f f f c c c c c c f f . 
+            . f f f f f f f f f f f f . 
+            . . f f f f f f f f f f . . 
+            . . e f f f f f f f f e . . 
+            . e 4 f f f f f f f f e . . 
+            . 4 d d e 3 3 3 3 3 f 4 . . 
+            . . 4 e e f f f f f f e . . 
+            . . . . . . . . f f f . . . 
+            `],
+        200,
+        true
+        )
+    }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy()
@@ -617,6 +639,7 @@ function titleFrame () {
     controller.startLightAnimation(light.rainbowAnimation, 500)
     music.baDing.play()
 }
+let characterChoice = 0
 let title: Sprite = null
 let goose: Sprite = null
 let healthSprite: Sprite = null
@@ -627,7 +650,7 @@ health = 2
 titleFrame()
 pause(2000)
 while (!(controller.A.isPressed() || controller.B.isPressed())) {
-    pause(100)
+    pause(1)
 }
 isStarted = true
 selectCharacter()
@@ -653,6 +676,7 @@ healthSprite = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.text)
 healthSprite.setPosition(12, 10)
+walking(character)
 game.onUpdateInterval(1000, function () {
     while (!(isStarted)) {
     	
