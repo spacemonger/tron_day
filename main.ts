@@ -172,6 +172,48 @@ function selectCharacter () {
             `, SpriteKind.Player)
     }
 }
+function animateHealth () {
+    if (health == 1) {
+        healthSprite.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . 2 2 2 . . . . . . . . 2 2 2 . 
+            2 2 2 2 2 2 . . . . 2 2 2 . 2 2 
+            2 2 2 2 2 2 2 . . 2 2 . . . . 2 
+            2 2 2 2 2 2 2 2 2 2 . . . . . 2 
+            2 2 2 2 2 2 2 2 . . . . . . . 2 
+            2 2 2 2 2 2 2 2 . . . . . . . 2 
+            2 2 2 2 2 2 2 2 . . . . . . 2 2 
+            . 2 2 2 2 2 2 2 . . . . . . 2 . 
+            . 2 2 2 2 2 2 2 . . . . 2 2 2 . 
+            . . . 2 2 2 2 2 . . 2 2 2 . . . 
+            . . . . . 2 2 2 2 2 2 . . . . . 
+            . . . . . . . 2 2 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+    }
+    if (health < 1) {
+        healthSprite.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . 2 2 2 . . . . . . . . 2 2 2 . 
+            2 2 . 2 2 2 . . . . 2 2 2 . 2 2 
+            2 . . . . 2 2 . . 2 2 . . . . 2 
+            2 . . . . . 2 2 2 2 . . . . . 2 
+            2 . . . . . . . . . . . . . . 2 
+            2 . . . . . . . . . . . . . . 2 
+            2 2 . . . . . . . . . . . . 2 2 
+            . 2 . . . . . . . . . . . . 2 . 
+            . 2 2 2 . . . . . . . . 2 2 2 . 
+            . . . 2 2 2 . . . . 2 2 2 . . . 
+            . . . . . 2 2 2 2 2 2 . . . . . 
+            . . . . . . . 2 2 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+    }
+}
 function spawnObstacle () {
     goose = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -191,8 +233,8 @@ function spawnObstacle () {
         . . c b d d d d d 5 5 5 b b . . 
         . . . c c c c c c c c b b . . . 
         `, SpriteKind.Enemy)
-    goose.setPosition(randint(0, 160), -10)
-    goose.setVelocity(0, 60)
+    goose.setPosition(character.x + randint(-15, 15), -10)
+    goose.setVelocity(0, 100)
 }
 function walking (mySprite: Sprite) {
     character = sprites.create(img`
@@ -214,7 +256,7 @@ function walking (mySprite: Sprite) {
         . . . f f . . f f . . . . 
         `, SpriteKind.Player)
     animation.runImageAnimation(
-    goose,
+    character,
     [img`
         . . . . . . . . . . . . . 
         . . . . . f f f f . . . . 
@@ -237,7 +279,7 @@ function walking (mySprite: Sprite) {
     false
     )
     animation.runImageAnimation(
-    goose,
+    character,
     [img`
         . . . . . . . . . . . . . 
         . . . . . f f f f . . . . 
@@ -260,6 +302,12 @@ function walking (mySprite: Sprite) {
     false
     )
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    otherSprite.destroy()
+    health += -1
+    animateHealth()
+    music.playMelody("E C C - - - - - ", 240)
+})
 function titleFrame () {
     scene.setBackgroundImage(img`
         8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -571,8 +619,11 @@ function titleFrame () {
 }
 let title: Sprite = null
 let goose: Sprite = null
+let healthSprite: Sprite = null
 let character: Sprite = null
+let health = 0
 let isStarted = false
+health = 2
 titleFrame()
 pause(2000)
 while (!(controller.A.isPressed() || controller.B.isPressed())) {
@@ -583,6 +634,25 @@ selectCharacter()
 character.setPosition(75, 105)
 controller.moveSprite(character, 100, 0)
 character.setFlag(SpriteFlag.StayInScreen, true)
+healthSprite = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . 2 2 2 . . . . . . . . 2 2 2 . 
+    2 2 2 2 2 2 . . . . 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+    . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+    . . . 2 2 2 2 2 2 2 2 2 2 . . . 
+    . . . . . 2 2 2 2 2 2 . . . . . 
+    . . . . . . . 2 2 . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.text)
+healthSprite.setPosition(12, 10)
 game.onUpdateInterval(1000, function () {
     while (!(isStarted)) {
     	
