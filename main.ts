@@ -719,6 +719,12 @@ healthSprite = sprites.create(img`
     `, SpriteKind.text)
 healthSprite.setPosition(12, 10)
 walking(character)
+game.onUpdateInterval(5000, function () {
+    while (!(isStarted)) {
+    	
+    }
+    music.ringTone(330)
+})
 game.onUpdateInterval(1000, function () {
     while (!(isStarted)) {
     	
@@ -726,8 +732,20 @@ game.onUpdateInterval(1000, function () {
     spawnObstacle()
     info.changeScoreBy(1)
 })
+game.onUpdateInterval(4000, function () {
+    while (!(isStarted)) {
+    	
+    }
+    music.ringTone(262)
+})
 forever(function () {
     while (!(isStarted)) {
     	
     }
+})
+game.onUpdateInterval(8000, function () {
+    while (!(isStarted)) {
+    	
+    }
+    music.ringTone(523)
 })
