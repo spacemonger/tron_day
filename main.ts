@@ -172,6 +172,28 @@ function selectCharacter () {
             `, SpriteKind.Player)
     }
 }
+function spawnObstacle () {
+    goose = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . b 5 5 b . . . 
+        . . . . . . b b b b b b . . . . 
+        . . . . . b b 5 5 5 5 5 b . . . 
+        . b b b b b 5 5 5 5 5 5 5 b . . 
+        . b d 5 b 5 5 5 5 5 5 5 5 b . . 
+        . . b 5 5 b 5 d 1 f 5 d 4 f . . 
+        . . b d 5 5 b 1 f f 5 4 4 c . . 
+        b b d b 5 5 5 d f b 4 4 4 4 b . 
+        b d d c d 5 5 b 5 4 4 4 4 4 4 b 
+        c d d d c c b 5 5 5 5 5 5 5 b . 
+        c b d d d d d 5 5 5 5 5 5 5 b . 
+        . c d d d d d d 5 5 5 5 5 d b . 
+        . . c b d d d d d 5 5 5 b b . . 
+        . . . c c c c c c c c b b . . . 
+        `, SpriteKind.Enemy)
+    goose.setPosition(randint(0, 160), -10)
+    goose.setVelocity(0, 60)
+}
 function walking (mySprite: Sprite) {
     character = sprites.create(img`
         . . . . f f f f . . . . . 
@@ -561,6 +583,12 @@ selectCharacter()
 character.setPosition(75, 105)
 controller.moveSprite(character, 100, 0)
 character.setFlag(SpriteFlag.StayInScreen, true)
+game.onUpdateInterval(1000, function () {
+    while (!(isStarted)) {
+    	
+    }
+    spawnObstacle()
+})
 forever(function () {
     while (!(isStarted)) {
     	
